@@ -14,7 +14,8 @@ public class UserService {
     UserRepository userRepository;
 
 
-    public void validaTransaction(User sender, BigDecimal amount) throws Exception {
+    public boolean transactionValidator(User sender, BigDecimal amount) throws Exception {
+        boolean isValidTransaction = false;
         if (sender.getUserType() == UserType.MERCHANT) {
             throw new IllegalArgumentException("Merchant user can't send money");
         }
@@ -22,6 +23,9 @@ public class UserService {
         if (sender.getBalance().compareTo(amount) < 0) {
             throw new Exception("Insufficient balance");
         }
+
+        isValidTransaction = true;
+        return isValidTransaction;
     }
 
     public User findUserById(Long id) {
