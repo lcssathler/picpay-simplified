@@ -2,12 +2,14 @@ package com.picpay.picpaysimplified.service;
 
 import com.picpay.picpaysimplified.domain.user.User;
 import com.picpay.picpaysimplified.domain.user.UserType;
+import com.picpay.picpaysimplified.dto.UserDTO;
 import com.picpay.picpaysimplified.repository.UserRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Log4j2
 @Service
@@ -34,9 +36,18 @@ public class UserService {
         return this.userRepository.findUserById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
     }
 
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public User createUser(UserDTO userDTO) {
+        User user = new User(userDTO);
+        this.saveUser(user);
+        return user;
+    }
+
     public void saveUser(User user) {
         this.userRepository.save(user);
         log.info("User saved successfully");
-
     }
 }

@@ -1,8 +1,10 @@
 package com.picpay.picpaysimplified.domain.user;
 
+import com.picpay.picpaysimplified.dto.UserDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.beans.BeanUtils;
 
 import java.math.BigDecimal;
 
@@ -21,5 +23,16 @@ public class User {
     private String email;
     private String password;
     private BigDecimal balance;
+    @Enumerated(EnumType.STRING)
     private UserType userType;
+    private UserDTO userDTO;
+
+    public User(UserDTO userDTO) {
+        this.firstName = userDTO.firstName();
+        this.lastName = userDTO.lastName();
+        this.email = userDTO.email();
+        this.password = userDTO.password();
+        this.balance = userDTO.balance();
+        this.userType = userDTO.userType();
+    }
 }
