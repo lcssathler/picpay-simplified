@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Log4j2
 @Service
@@ -49,5 +50,11 @@ public class UserService {
     public void saveUser(User user) {
         this.userRepository.save(user);
         log.info("User saved successfully");
+    }
+
+    public User updateUser(Long id, BigDecimal newBalance) {
+        User userById = userRepository.findById(id).get();
+        userById.setBalance(newBalance);
+        return userById;
     }
 }
