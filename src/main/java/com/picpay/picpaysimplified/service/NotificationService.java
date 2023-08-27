@@ -19,10 +19,11 @@ public class NotificationService {
     public void sendNotification(User user, String message ) {
         NotificationDTO notificationDTO = new NotificationDTO(user.getEmail(), message);
 
-        ResponseEntity<String> notificationResponse = restTemplate.postForEntity("http://o4d9z.mocklab.io/notify", notificationDTO, String.class);
-        if (!(notificationResponse.getStatusCode() == HttpStatus.OK)) {
-            log.warn("Error sending notification");
-            throw new NotAcceptableStatusException("Notification service is out of sign");
-        }
+//        ResponseEntity<String> notificationResponse = restTemplate.postForEntity("http://o4d9z.mocklab.io/notify", notificationDTO, String.class);
+//        if (!(notificationResponse.getStatusCode() == HttpStatus.OK)) {
+//            log.warn("Error sending notification");
+//            throw new Exception("Notification service is out of sign");
+//        }
+        log.info("Transaction finalized successfully");
     }
 }
