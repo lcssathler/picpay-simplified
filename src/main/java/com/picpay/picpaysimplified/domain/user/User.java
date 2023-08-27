@@ -4,6 +4,7 @@ import com.picpay.picpaysimplified.dto.UserDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
 import java.math.BigDecimal;
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
 @Table(name = "TB_USERS")
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class User {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,7 +27,6 @@ public class User {
     private BigDecimal balance;
     @Enumerated(EnumType.STRING)
     private UserType userType;
-    private UserDTO userDTO;
 
     public User(UserDTO userDTO) {
         this.firstName = userDTO.firstName();
